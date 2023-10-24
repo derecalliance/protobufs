@@ -83,7 +83,6 @@ message DeRecMessage {
       VerifyShareRequestMessage verifyShareRequestMessage = 4;
       GetSecretIdsVersionsRequestMessage getSecretIdsVersionsRequestMessage = 5;
       GetShareRequestMessage getShareRequestMessage = 6;
-      MessagingErrorMessage messagingErrorMessage = 7; 
     }
   }
   message HelperMessageBodies {

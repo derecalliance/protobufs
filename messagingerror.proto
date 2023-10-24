@@ -6,7 +6,7 @@ package org.derecalliance.derec.protobuf;
 /* 
  * Protocol message sent by a message receiver who receives a bad message back to the message sender.
  */
-message MessagingErrorMessage {
+message ErrorResponseMessage {
     Result result = 1;
 }
 
