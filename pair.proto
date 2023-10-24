@@ -3,7 +3,7 @@ import "communicationinfo.proto";
 import "parameterrange.proto";
 import "result.proto";
 
-package derec.message;
+package org.derecalliance.derec.protobuf;
 /*
  * Is the sender of this message (i.e., the responder) a
  * helper, or a sharer that is not in recovery mode, or a sharer that is

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package derec.message;
+package org.derecalliance.derec.protobuf;
 
 /*
  * Result of success or failure for processing the request messages

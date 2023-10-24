@@ -1,7 +1,7 @@
 syntax = "proto3";
 import "result.proto";
 
-package derec.message;
+package org.derecalliance.derec.protobuf;
 
 /* 
  * Protocol message sent by a message receiver who receives a bad message back to the message sender.

@@ -8,7 +8,7 @@ import "getshare.proto";
 import "secretidsversions.proto";
 import "messagingerror.proto";
 
-package derec.message;
+package org.derecalliance.derec.protobuf;
 
 /*
  * Every message in the protocol (other than ContactMessage) consists
