@@ -47,6 +47,15 @@ enum StatusEnum {
   /* This share version for this secret ID not stored by this helper. */
   UNKNOWN_SHARE_VERSION = 6;
 
+  /* The received message could not be decrypted successfully. */
+  DECRYPTION_FAILED = 7;
+
+  /* Signature could not be verified */
+  VERIFICATION_FAILED = 8;
+
+  /* Format error - includes errors like protobuf parsing failure or invalid message formatting. */
+  FORMAT_ERROR = 9;
+
   /* the helper is asking the sharer to send an unpair request */
   REQUEST_TO_CLOSE = 99;
 }
