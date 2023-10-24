@@ -97,7 +97,7 @@ message DeRecMessage {
       VerifyShareResponseMessage verifyShareResponseMessage = 4;
       GetSecretIdsVersionsResponseMessage getSecretIdsVersionsResponseMessage = 5;
       GetShareResponseMessage getShareResponseMessage = 6;
-      MessagingErrorMessage messagingErrorMessage = 7; 
+      ErrorResponseMessage messagingErrorMessage = 7;
     }
   }
 }
