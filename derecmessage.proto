@@ -6,9 +6,9 @@ import "storeshare.proto";
 import "verify.proto";
 import "getshare.proto";
 import "secretidsversions.proto";
-import "messagingerror.proto";
+import "error.proto";
 
-package derec.message;
+package org.derecalliance.derec.protobuf;
 
 /*
  * Every message in the protocol (other than ContactMessage) consists
@@ -83,7 +83,6 @@ message DeRecMessage {
       VerifyShareRequestMessage verifyShareRequestMessage = 4;
       GetSecretIdsVersionsRequestMessage getSecretIdsVersionsRequestMessage = 5;
       GetShareRequestMessage getShareRequestMessage = 6;
-      MessagingErrorMessage messagingErrorMessage = 7; 
     }
   }
   message HelperMessageBodies {
@@ -98,7 +97,7 @@ message DeRecMessage {
       VerifyShareResponseMessage verifyShareResponseMessage = 4;
       GetSecretIdsVersionsResponseMessage getSecretIdsVersionsResponseMessage = 5;
       GetShareResponseMessage getShareResponseMessage = 6;
-      MessagingErrorMessage messagingErrorMessage = 7; 
+      ErrorResponseMessage errorResponseMessage = 7;
     }
   }
 }

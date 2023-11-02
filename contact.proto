@@ -1,5 +1,5 @@
 syntax = "proto3";
-package derec.message;
+package org.derecalliance.derec.protobuf;
 
 /**
 * ----------------------------------------------------------------------------

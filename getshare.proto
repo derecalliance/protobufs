@@ -2,7 +2,7 @@ syntax = "proto3";
 import "result.proto";
 import "storeshare.proto";
 
-package derec.message;
+package org.derecalliance.derec.protobuf;
 
 /* Request a given share that is stored by the helper. */
 message GetShareRequestMessage {

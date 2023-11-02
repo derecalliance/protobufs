@@ -1,0 +1,12 @@
+syntax = "proto3";
+import "result.proto";
+
+package org.derecalliance.derec.protobuf;
+
+/* 
+ * Protocol message sent by a message receiver who receives a bad message back to the message sender.
+ */
+message ErrorResponseMessage {
+    Result result = 1;
+}
+

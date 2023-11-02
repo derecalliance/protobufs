@@ -3,7 +3,7 @@ import "result.proto";
 import "parameterrange.proto";
 import "google/protobuf/timestamp.proto";
 
-package derec.message;
+package org.derecalliance.derec.protobuf;
 
 /*
  * Request that the given share be stored, and that all versions outside

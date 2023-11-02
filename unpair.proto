@@ -1,7 +1,7 @@
 syntax = "proto3";
 import "result.proto";
 
-package derec.message;
+package org.derecalliance.derec.protobuf;
 
 /*
  * ----------------------------------------------------------------------------
