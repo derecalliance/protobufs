@@ -6,7 +6,7 @@ import "storeshare.proto";
 import "verify.proto";
 import "getshare.proto";
 import "secretidsversions.proto";
-import "messagingerror.proto";
+import "error.proto";
 
 package org.derecalliance.derec.protobuf;
 
@@ -97,7 +97,7 @@ message DeRecMessage {
       VerifyShareResponseMessage verifyShareResponseMessage = 4;
       GetSecretIdsVersionsResponseMessage getSecretIdsVersionsResponseMessage = 5;
       GetShareResponseMessage getShareResponseMessage = 6;
-      ErrorResponseMessage messagingErrorMessage = 7;
+      ErrorResponseMessage errorResponseMessage = 7;
     }
   }
 }
