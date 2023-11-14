@@ -17,7 +17,9 @@ package org.derecalliance.derec.protobuf;
  * This protobuf message is protobuf serialized to a binary byte array, then
  * signed with the sender's private signature key, then encrypted with the
  * receiver's public encryption key.  The OpenPGP format is used for the
- * signed-then-encrypted message, which is then sent.
+ * signed-then-encrypted message. The sender then sends the concatenation of 
+ * the nonce (for pairing message and response) or secretID (for any other message), 
+ * which is an 8-byte, big-endian integer, followed by the signed-then-encrypted message.
  * This message will usually contain only a single DeRecMessage. If it contains
  * more, then it is equivalent to sending them individually, in the
  * given order.
