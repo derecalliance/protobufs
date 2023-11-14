@@ -50,9 +50,9 @@ message PairRequestMessage {
   CommunicationInfo communicationInfo = 5;
 
   /*
-   * 32-byte (random) nonce to identify the pairing session
+   * 64-bit (random) nonce to identify the pairing session
    */
-  bytes nonce = 6;
+  int64 nonce = 6;
 
   /*
    * The parameter range for the sender.
@@ -85,10 +85,10 @@ message PairResponseMessage {
   CommunicationInfo communicationInfo = 4;
 
   /*
-   * 32-byte (random) nonce to identify the pairing session;
+   * 64-bit (random) nonce to identify the pairing session;
    * this is the same value as sent in the pairing request
    */
-  bytes nonce = 5;
+  int64 nonce = 5;
 
   /*
    * The parameter range for the sender.
