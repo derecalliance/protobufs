@@ -18,10 +18,9 @@ package org.derecalliance.derec.protobuf;
  * signed with the sender's private signature key, then encrypted with the
  * receiver's public encryption key.  The OpenPGP format is used for the
  * signed-then-encrypted message. The sender then sends the concatenation of 
- * the nonce (for pairing message and response) or secretID (for any other message),
- * followed by the signed-then-encrypted message. The nonce or secretId consists of
- * a single byte giving its length (in the range [1, 16]), followed by the bytes of the 
- * nonce (big-endian int64) or secreId (byte array).
+ * the keyID of the recipient, followed by the signed-then-encrypted message. 
+ * The keyID is a 32-bit signed integer (big endian), used to identify which
+ * encryption key the recipient should use to decrypt the message.
  * 
  * This message will usually contain only a single DeRecMessage. If it contains
  * more, then it is equivalent to sending them individually, in the
