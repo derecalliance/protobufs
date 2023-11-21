@@ -19,9 +19,10 @@ message ContactMessage {
  string publicEncryptionKey = 1;
 
  /**
-  * 32-byte (random) nonce. This should be given to a party after authenticing.
+  * 64-bit (random) nonce to identify the pairing session. 
+  * This should be given to a party after authenticating.
   */
- bytes nonce = 2;
+ int64 nonce = 2;
 
  /**
   * URI endpoint for contacting the helper/sharer
