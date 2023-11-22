@@ -43,21 +43,31 @@ message PairRequestMessage {
    */
   string publicEncryptionKey = 4;
 
+/**
+  * A number used to later identify the publicEncryptionKey. 
+  * When any message is later sent to this initiator, and it is encrypted
+  * with the publicEncryptionKey, this identifier is also sent, so the recipient 
+  * knows which key to use to decrypt it. If the recipient creates multiple 
+  * keys for multiple pairings, then they should remember the publicKeyId that
+  * they chose for each one, so they won't have to try all the keys during decryption. 
+  */
+ int32 publicKeyId = 5;
+
   /*
    * sender’s app-readable contact information,
    * such as name, phone number, etc.
    */
-  CommunicationInfo communicationInfo = 5;
+  CommunicationInfo communicationInfo = 6;
 
   /*
    * 32-byte (random) nonce to identify the pairing session
    */
-  bytes nonce = 6;
+  bytes nonce = 7;
 
   /*
    * The parameter range for the sender.
    */
-  ParameterRange parameterRange = 7;
+  ParameterRange parameterRange = 8;
 }
 
 /*
