@@ -17,23 +17,32 @@ message ContactMessage {
   * public key in PEM encoding format
   */
  string publicEncryptionKey = 1;
+ 
+/**
+  * A number used to later identify the publicEncryptionKey. 
+  * When a message is sent to the creator of this contact, and it is encrypted
+  * with the publicEncryptionKey, this identifier is also sent, so the recipient 
+  * knows which key to use to decrypt it. If the recipient creates multiple 
+  * keys for multiple pairings, then they should remember the publicKeyId that
+  * they chose for each one, so they won't have to try all the keys during decryption. 
+  */
+ int32 publicKeyId = 2;
 
  /**
   * 64-bit (random) nonce to identify the pairing session. 
   * This should be given to a party after authenticating.
-  */
- int64 nonce = 2;
+ int64 nonce = 3;
 
  /**
   * URI endpoint for contacting the helper/sharer
   * This can be an https endpoint or a rabbitMQ endpoint
   */
- string transportUri = 3;
+ string transportUri = 4;
 
   /**
    * Message encoding mechanism
    */
-  MessageEncodingEnum messageEncodingType = 4;
+  MessageEncodingEnum messageEncodingType = 5;
 
   enum MessageEncodingEnum {
    Protobuf = 0;
