@@ -29,12 +29,9 @@ message ContactMessage {
  int32 publicKeyId = 2;
 
  /**
-  * 32-byte (random) nonce. This should be given to a party after authenticing.
-  * This is useful for avoiding a MITM attack: the creator of this contact will
-  * know that they are receiving a pairing request from the same person that 
-  * they authenticated and gave this contact to.
-  */
- bytes nonce = 3;
+  * 64-bit (random) nonce to identify the pairing session. 
+  * This should be given to a party after authenticating.
+ int64 nonce = 3;
 
  /**
   * URI endpoint for contacting the helper/sharer
