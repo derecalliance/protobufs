@@ -31,6 +31,7 @@ message ContactMessage {
  /**
   * 64-bit (random) nonce to identify the pairing session. 
   * This should be given to a party after authenticating.
+  */
  int64 nonce = 3;
 
  /**
