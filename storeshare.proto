@@ -31,14 +31,14 @@ message StoreShareRequestMessage {
    bytes share = 1;
 
   /*
-   * An identifier for the algorithm used to create the share bytes (field 4). For interoperability purposes there 
+   * An identifier for the algorithm used to create the share bytes (field 1). For interoperability purposes there 
    * may be a registry of ids and corresponding protobuf definitions of the contents of the share, if it is desired that 
    * different sharer implementations are able to reconstruct secrets that have been shared by other implementations.
    * Share algorithm number 0 is the creation of the `share` bytes by serializing the 
    * protobuf message `CommittedDeRecShare`. It is recommended that implementations support at least this 
    * algorithm, to aid in interoperability if a secret is created on one app and recovered using another app.
    */
-   bytes shareAlgorithm = 2;
+   int32 shareAlgorithm = 2;
 
   /*
    * The version number of the share (the secretId is given in the containing DeRecMessage)
@@ -126,6 +126,13 @@ message DeRecShare {
    * than or equal to the last seen version
    */
   int32 version = 5;
+
+  /*
+   * A description of the version. This is not encrypted, so it can
+   * be read by the helper. The sharer should either leave this 
+   * empty, or give a description that they want the helper to know. 
+   */
+  string versionDescription = 6;
 }
 
 /*
