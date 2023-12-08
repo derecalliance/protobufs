@@ -1,0 +1,49 @@
+syntax = "proto3";
+import "result.proto";
+import "parameterrange.proto";
+import "google/protobuf/timestamp.proto";
+/*
+ * This is the sharer's data to be encrypted and stored with the helpers.
+ * It includes both secret data and various pieces of secret metadata.
+ *
+ * This is the standard format for use with "algorithm 1" for creating shares.
+ */
+message Secret {
+  /*
+   * Any data that the sharer wants to keep secret, such as keys and
+   * passwords, and documents. This is the serialized secret data and
+   * secret metadata.
+   */
+  bytes secretData = 1;
+
+  /* The private encryption key used by the sharer, in PEM encoding.*/
+  string privateEncryptionKey = 2;
+
+  /* The private signature key used by the sharer, in PEM encoding. */
+  string privateSignatureKey = 3;
+
+  /* The time and date when the sharer created the shares of this secret. */
+  google.protobuf.Timestamp creationTime = 4;
+
+  /* Threshold for # of helpers for recovery */
+  int64 helperThresholdForRecovery = 5;
+
+  /* Threshold for # of helpers confirming receipt of a share,
+   * to delete the old one
+   */
+  int64 helperThresholdForConfirmingShareReceipt = 6;
+
+  message HelperSpecificInfo {
+    /*
+     * SHA-384 hash of helper's public encryption key
+     */
+    bytes helper = 1;
+
+    /*
+     * agreed upon parameters between helper and sharer
+     */
+    ParameterRange helperParams = 2;
+  }
+
+  repeated HelperSpecificInfo helpers = 7;
+}
