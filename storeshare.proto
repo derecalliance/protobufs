@@ -70,6 +70,13 @@ message StoreShareRequestMessage {
   * The helper should delete all other versions outside this list.
   */
   repeated int32 keepList = 4;
+
+  /*
+   * A description of the version. This is not encrypted, so it can
+   * be read by the helper. The sharer should either leave this
+   * empty, or give a description that they want the helper to know.
+   */
+  string versionDescription = 5;
 }
 
 

@@ -1,3 +1,20 @@
+/*
+ * Copyright (c) DeRec Alliance and its Contributors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 syntax = "proto3";
 import "result.proto";
 import "parameterrange.proto";
@@ -6,13 +23,12 @@ import "google/protobuf/timestamp.proto";
  * This is the sharer's data to be encrypted and stored with the helpers.
  * It includes both secret data and various pieces of secret metadata.
  *
- * This is the standard format for use with "algorithm 1" for creating shares.
+ * This is the standard format for use with "algorithm 0" for creating shares.
  */
 message Secret {
   /*
    * Any data that the sharer wants to keep secret, such as keys and
-   * passwords, and documents. This is the serialized secret data and
-   * secret metadata.
+   * passwords, and documents. This is the serialized secret data.
    */
   bytes secretData = 1;
 
@@ -33,6 +49,8 @@ message Secret {
    */
   int64 helperThresholdForConfirmingShareReceipt = 6;
 
+  repeated HelperSpecificInfo helpers = 7;
+
   message HelperSpecificInfo {
     /*
      * SHA-384 hash of helper's public encryption key
@@ -44,6 +62,4 @@ message Secret {
      */
     ParameterRange helperParams = 2;
   }
-
-  repeated HelperSpecificInfo helpers = 7;
 }
