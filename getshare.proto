@@ -44,5 +44,8 @@ message GetShareResponseMessage {
   Result result = 1;
 
   /* the committed deRec share */
-  CommittedDeRecShare committedDeRecShare = 2;
+  bytes committedDeRecShare = 2;
+
+  /* the share algorithm */
+  int32 shareAlgorithm = 3;
 }

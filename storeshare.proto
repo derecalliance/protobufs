@@ -51,8 +51,11 @@ message StoreShareRequestMessage {
    * An identifier for the algorithm used to create the share bytes (field 1). For interoperability purposes there 
    * may be a registry of ids and corresponding protobuf definitions of the contents of the share, if it is desired that 
    * different sharer implementations are able to reconstruct secrets that have been shared by other implementations.
-   * Share algorithm number 0 is the creation of the `share` bytes by serializing the 
-   * protobuf message `CommittedDeRecShare`. It is recommended that implementations support at least this 
+   *
+   * Share algorithm number 0 is the creation of the `share` bytes by serializing the
+   * protobuf message `CommittedDeRecShare`, which is detailed in the DeRecAlliance Repo 'cryptography'.
+   *
+   * It is recommended that implementations support at least this
    * algorithm, to aid in interoperability if a secret is created on one app and recovered using another app.
    */
    int32 shareAlgorithm = 2;
@@ -67,133 +70,13 @@ message StoreShareRequestMessage {
   * The helper should delete all other versions outside this list.
   */
   repeated int32 keepList = 4;
-}
-
-/*
- * A DeRec share that is committed and ready to be given to a helper to store.
- * During recovery, this protobuf message is returned.
- * The committment involves a Merkle tree.  The hash of the share given to
- * each helper is one leaf in the tree.  Each leaf hash and internal hash
- * is a SHA-384 hash. The Merkle path from a leaf to the root (which is the
- * siblings of all nodes along that route) is called merklePath.
- * The root hash is called a "commitment".
- */
-message CommittedDeRecShare {
-  /*
-   * Protobuf serialization of DeRecShare.
-   * The Helper will parse this to see the version number of the share
-   * and the secret ID.
-   */
-  bytes deRecShare = 1;
-
-  /** The Merkle root */
-  bytes commitment = 2;
-
-  /* one leaf or interior node. isLeft is true if it's a left child */
-  message SiblingHash {
-    bool isLeft = 1;
-    bytes hash = 2;
-  }
-
-  /* The bottom-up Merkle path */
-  repeated SiblingHash merklePath = 3;
-}
-
-
-/*
- * The information to share with a helper.
- * The sharer first generates a random AES-256 key k, and uses that
- * to AES-GCM encrypt the secret. A random polynomial f is generated
- * such that f(0)=k, and is evaluated at a random x value for the
- * intended helper.  The share contains y, where f(x) = y.
- * This should be done in GF(p), where p is the smallest 256-bit prime.
- * The order of the polynomial is the threshold for how many helpers are needed
- * to recover it.
- * This also includes the secretId and share version number, because they
- * should be serialized along with this, in order for them all to be signed
- * together.
- */
-message DeRecShare {
-  /*
-   * The result of taking the secret to be shared, serializing it,
-   * then encrypting it with a random AES-256 key.
-   */
-  bytes encryptedSecret = 1;
-
-  /*
-   * This is a random 256-bit integer, 2's complement, big endian.
-   */
-  bytes x = 2;
-
-  /*
-   * This is f(x)
-   */
-  bytes y = 3;
-
-  /*
-   * Secret ID (any length from 1 to 16 bytes) for the requested share
-   * Must be unique for each secret created by a sharer.
-   */
-  bytes secretId = 4;
-
-  /*
-   * version number for the share;
-   * note that helper is entitled to ignore any
-   * StoreShareRequestMessage with a version less
-   * than or equal to the last seen version
-   */
-  int32 version = 5;
 
   /*
    * A description of the version. This is not encrypted, so it can
-   * be read by the helper. The sharer should either leave this 
-   * empty, or give a description that they want the helper to know. 
+   * be read by the helper. The sharer should either leave this
+   * empty, or give a description that they want the helper to know.
    */
-  string versionDescription = 6;
-}
-
-/*
- * This is the sharer's data to be encrypted and stored with the helpers.
- * It includes both secret data and various pieces of secret metadata.
- */
-message Secret {
-  /*
-   * Any data that the sharer wants to keep secret, such as keys and
-   * passwords, and documents. This is the serialized secret data and
-   * secret metadata.
-   */
-  bytes secretData = 1;
-
-  /* The private encryption key used by the sharer, in PEM encoding.*/
-  string privateEncryptionKey = 2;
-
-  /* The private signature key used by the sharer, in PEM encoding. */
-  string privateSignatureKey = 3;
-
-  /* The time and date when the sharer created the shares of this secret. */
-  google.protobuf.Timestamp creationTime = 4;
-
-  /* Threshold for # of helpers for recovery */
-  int64 helperThresholdForRecovery = 5;
-
-  /* Threshold for # of helpers confirming receipt of a share,
-   * to delete the old one
-   */
-  int64 helperThresholdForConfirmingShareReceipt = 6;
-
-  message HelperSpecificInfo {
-    /*
-     * SHA-384 hash of helper's public encryption key
-     */
-    bytes helper = 1;
-
-    /*
-     * agreed upon parameters between helper and sharer
-     */
-    ParameterRange helperParams = 2;
-  }
-
-  repeated HelperSpecificInfo helpers = 7; 
+  string versionDescription = 5;
 }
 
 
