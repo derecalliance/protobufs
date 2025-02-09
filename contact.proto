@@ -62,6 +62,11 @@ message ContactMessage {
    */
   MessageEncodingEnum messageEncodingType = 5;
 
+  /**
+  * public key in PEM encoding format used to verify the signature of the message
+  */
+  string publicVerificationKey = 6;
+
   enum MessageEncodingEnum {
    Protobuf = 0;
   }
